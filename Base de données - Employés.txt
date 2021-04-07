@@ -1,0 +1,12 @@
+
+CREATE TABLE ville (id_ville INT PRIMARY KEY, nom_ville VARCHAR(255), superficie_ville INT, nbe_habitants INT);
+
+CREATE TABLE departement (id_departement INT PRIMARY KEY, nom_departement VARCHAR(255), id_ville, CONSTRAINT fk_ville FOREIGN KEY (id_ville) REFERENCES ville(id_ville));
+
+CREATE TABLE employe (id_employe INT PRIMARY KEY, nom_employe VARCHAR(255), fonction_employe VARCHAR(255), salaire_employe INT, id_departement INT, dateentree_employe DATE, CONSTRAINT fk_dpt FOREIGN KEY (id_departement) REFERENCES departement(id_departement);
+
+--SELECT nom_employe FROM employe ;
+--SELECT length(id_employe) FROM employe;
+--SELECT nom_employe FROM employe WHERE  salaire_employe =  (SELECT MAX(salaire_employe) FROM employe);
+--SELECT avg(salaire_employe) FROM employe;
+--SELECT fonction_employe,  nom_departement FROM employe INNER JOIN departement ON employe.id_departement = departement.id_departement WHERE salaire_employe >= (SELECT avg(salaire_employe) FROM employe) ;

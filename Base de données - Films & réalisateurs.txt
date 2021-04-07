@@ -1,0 +1,55 @@
+TABLE PAYS
+
+CREATE TABLE pays (id_pays INT PRIMARY KEY, nom VARCHAR(255), superficie INT, nombre_habitants INT, capitale VARCHAR(255));
+INSERT INTO pays VALUES (1, "Etats-Unis", 100000, 300000000, "Washington DC"),(2,"Royaume-Uni", 100000, 45000000, "Londres"), (3,"France", 1000000, 66000000, "Paris");
+
+
+
+TABLE REALISATEUR
+
+CREATE TABLE realisateur (id_realisateur INT PRIMARY KEY, nom_realisateur VARCHAR(255), prenom_realisateur VARCHAR(255), ddn_realisateur DATE, id_pays INT, CONSTRAINT fk FOREIGN KEY (id_pays) REFERENCES pays(id_pays));
+INSERT INTO realisateur VALUES (1,"Lucas","George","1994-05-14",1),
+(2,"Kershner","Irvin","1923-04-29",1),
+(3,"Marquand","Richard","1937-09-22",2),
+(4,"Abrams","Jeffrey Jacob","1966-06-27",1),
+(5,"Johnson","Rian","1973-12-17",1),
+(6,"Spielberg","Steven","1946-12-18",1),
+(7,"Badham","John","1939-08-25",2),
+(8,"Besson","Luc","1959-03-18",3),
+(9,"Tarantino","Quentin","1963-03-27",1),
+(10,"Branagh","Kenneth","1960-12-10",2);
+
+
+TABLE FILM
+
+CREATE TABLE film (id_film INT PRIMARY KEY, titre_film VARCHAR(255), id_realisateur INT, pays_realisateur VARCHAR(255), anneesortie_film INT, genre_film VARCHAR(255), CONSTRAINT fk FOREIGN KEY (id_realisateur) REFERENCES realisateur(id_realisateur));
+INSERT INTO film VALUES (1,"Star Wars 4",1,"Etats-Unis",1977,"Science Fiction"),
+(2,"Star Wars 5",2,"Etats-Unis",1980,"Sciences Fiction"),
+(3,"Star Wars 6",3,"Etats-Unis",1983,"Sciences Fiction"),
+(4,"Star Wars 1",1,"Etats-Unis",1999,"Sciences Fiction"),
+(5,"Star Wars 2",1,"Etats-Unis",2002,"Sciences Fiction"),
+(6,"Star Wars 3",1,"Etats-Unis",2005,"Sciences Fiction"),
+(7,"Star Wars 7",4,"Etats-Unis",2015,"Sciences Fiction"),
+(8,"Star Wars 8",5,"Etats-Unis",2017,"Sciences Fiction"),
+(9,"Star Wars 9",4,"Etats-Unis",2018,"Science Fiction"),
+(10,"Indiana Jones et les aventuriers de l'arche perdue",6,"Etats-Unis",1981,"Aventure"),
+(11,"Indiana Jones et le temple maudit",6,"Etats-Unis",1984,"Aventure"),
+(12,"WarGames",7,"Etats-Unis",1983,"Sciences Fiction"),
+(13,"Le cinquième élèment",8,"France",1997,"Sciences Fiction"),
+(14,"Valérian et la cité des milles planètes",8,"France",2017,"Sciences Fiction"),
+(15,"Léon",8,"France",1994,"Drame"),
+(16,"Anna",8,"France",2019,"Thriller"),
+(17,"Once Upon A Time in Hollywood",9,"Etas-Unis",2019,"Comédie dramatique"),
+(18,"Django Unchained",9,"Etas-Unis",2012,"Western"),
+(19,"Pulp Fiction",9,"Etas-Unis",1994,"Comédie dramatique"),
+(20,"Mort sur le Nil",10,"Etats-Unis",2020,"Policier"),
+(21,"Le Crime de l'Orient-Express",10,"Royaume-Uni",2017,"Policier"),
+(22,"Thor",10,"Etats-Unis",2011,"Super-Héros"),
+(23,"Henry V",10,"Royaume-Un",1989,"Film historique");
+
+
+
+
+SELECT titre_film, nom_realisateur FROM film INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur WHERE id_film = 15 ;
+
+SELECT genre_film, prenom_realisateur, nom_realisateur FROM film INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur WHERE anneesortie_film>=1982 AND anneesortie_film<=2007 ;

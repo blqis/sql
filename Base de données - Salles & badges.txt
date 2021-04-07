@@ -1,0 +1,25 @@
+
+CREATE TABLE enseignants (id_enseignant INT PRIMARY KEY, nom VARCHAR(255), prenom VARCHAR(255), id_badge INT CONSTRAINT fk FOREIGN KEY (id_badge) REFERENCES badges(id_badge));
+
+INSERT INTO enseignants VALUES (1, "Laure", "Dinateur", 1), (2, "Sam", "Sung", 2), (3, "Pa", "Tate", 3);
+
+CREATE TABLE salles (id_salle INT PRIMARY KEY, numero INT, capacite INT,
+surface INT);
+INSERT INTO salles VALUES (1, 1, 75, 40), (2, 2, 50, 60), (3, 3, 10, 25);
+
+
+
+
+CREATE TABLE badges (id_enseignant INT PRIMARY KEY, numero INT);
+INSERT INTO badges VALUES (1,1), (2,2), (3,3);
+
+
+CREATE TABLE batiments (id_batiment INT PRIMARY KEY, nom VARCHAR(255), id_salle INT, description VARCHAR(255), affectation_principale VARCHAR(255), CONSTRAINT fk FOREIGN KEY(id_salle) REFERENCES salles(id_salle); 
+
+INSERT INTO batiments VALUES (1, "Administration", 3, "Secretariat ferme le samedi", "Administration"), (2, "Salle Polyvalente", 2, "Cours magistraux ici", "Conference"), (3, "Salle de NSI", 1, "Ordinateurs sous UBUNTU", "Cours");
+
+ 
+SELECT * FROM salles;
+SELECT numero FROM salles, capacite FROM salles;
+SELECT avg(capacite) FROM salles;
+SELECT id_batiment, max(surface) FROM salles
